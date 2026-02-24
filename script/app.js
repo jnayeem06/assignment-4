@@ -1,76 +1,79 @@
  
-var jobCards = document.querySelectorAll('.job-card');
+const totalCount = document.getElementById("totalCount");
+const interviewCount = document.getElementById("interviewCount");
+const rejectedCount = document.getElementById("rejectedCount");
+const jobsCountText = document.getElementById("jobsCount");
+
+const jobCardsContainer = document.getElementById("jobCards");
+ 
+const filterAll = document.getElementById("filterAll");
+const filterInterview = document.getElementById("filterInterview");
+const filterRejected = document.getElementById("filterRejected");
 
  
-var filterAllBtn = document.getElementById('filterAll');
-var filterInterviewBtn = document.getElementById('filterInterview');
-var filterRejectedBtn = document.getElementById('filterRejected');
+totalCount.textContent = document.querySelectorAll(".job-card").length; // total jobs
+interviewCount.textContent = 0;  
+rejectedCount.textContent = 0;  
+jobsCountText.textContent = document.querySelectorAll(".job-card").length + " jobs";
 
  
-var totalJobs = document.getElementById('totalCount');
-var interviewJobs = document.getElementById('interviewCount');
-var rejectedJobs = document.getElementById('rejectedCount');
-var jobsText = document.getElementById('jobsCount');
+function updateCounts() {
+  const allJobs = document.querySelectorAll(".job-card");
+  let interviewJobs = 0;
+  let rejectedJobs = 0;
 
- 
-for (var i = 0; i < jobCards.length; i++) {
-    var card = jobCards[i];
-    var deleteBtn = card.querySelector('button');
-    deleteBtn.onclick = function() {
-        var parentCard = this.parentNode.parentNode;  
-        parentCard.remove();
-        updateCounters();
-    };
+  allJobs.forEach(job => {
+    if(job.dataset.status === "interview") interviewJobs++;
+    if(job.dataset.status === "rejected") rejectedJobs++;
+  });
+
+  totalCount.textContent = allJobs.length;
+  interviewCount.textContent = interviewJobs;
+  rejectedCount.textContent = rejectedJobs;
+  jobsCountText.textContent = allJobs.length + " jobs";
 }
 
  
-function filterJobs(status) {
-    for (var i = 0; i < jobCards.length; i++) {
-        var card = jobCards[i];
-        if (status == 'all') {
-            card.classList.remove('hidden');
-        } else if (card.dataset.status == status) {
-            card.classList.remove('hidden');
-        } else {
-            card.classList.add('hidden');
-        }
-    }
-    updateCounters();
-}
+jobCardsContainer.addEventListener("click", function(event) {
+  const card = event.target.closest(".job-card");
+  if(!card) return;
+
+  const text = event.target.innerText.toUpperCase();
+ 
+  if(text.includes("DELETE")) {
+    card.remove();
+    updateCounts();
+    return;
+  }
+
+   
+  if(text.includes("INTERVIEW")) {
+    card.dataset.status = "interview";  
+    updateCounts();  
+    return;
+  }
+
+  
+  if(text.includes("REJECTED") && !text.includes("DELETE")) {
+    card.dataset.status = "rejected"; 
+    updateCounts();  
+    return;
+  }
+});
 
  
-filterAllBtn.onclick = function() { filterJobs('all'); };
-filterInterviewBtn.onclick = function() { filterJobs('interview'); };
-filterRejectedBtn.onclick = function() { filterJobs('rejected'); };
+filterAll.addEventListener("click", () => {
+  document.querySelectorAll(".job-card").forEach(c => c.style.display = "flex");
+});
 
- 
-function updateCounters() {
-    var visibleCount = 0;
-    var interviewCountNum = 0;
-    var rejectedCountNum = 0;
+filterInterview.addEventListener("click", () => {
+  document.querySelectorAll(".job-card").forEach(c => {
+    c.style.display = c.dataset.status === "interview" ? "flex" : "none";
+  });
+});
 
-    for (var i = 0; i < jobCards.length; i++) {
-        var card = jobCards[i];
-        if (!card.classList.contains('hidden')) {
-            visibleCount++;
-            if (card.dataset.status == 'interview') {
-                interviewCountNum++;
-            } else if (card.dataset.status == 'rejected') {
-                rejectedCountNum++;
-            }
-        }
-    }
-
-    totalJobs.textContent = visibleCount;
-    interviewJobs.textContent = interviewCountNum;
-    rejectedJobs.textContent = rejectedCountNum;
-    jobsText.textContent = visibleCount + ' jobs';
-}
-
- 
-updateCounters();
- 
- 
- 
- 
- 
+filterRejected.addEventListener("click", () => {
+  document.querySelectorAll(".job-card").forEach(c => {
+    c.style.display = c.dataset.status === "rejected" ? "flex" : "none";
+  });
+});
