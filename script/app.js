@@ -69,3 +69,12 @@ function updateCounters() {
 
  
 updateCounters();
+
+updateCounters();
+updateCounters();
+updateCounters();
+updateCounters();
+updateCounters();
+updateCounters();
+updateCounters();
+ 
