@@ -1,0 +1,215 @@
+ <!DOCTYPE html>
+<html lang="en" class="bg-white/20 backdrop-blur-sm">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOB TRACKER</title>
+
+   
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <style>
+ 
+        body {
+            font-family: "Geist", sans-serif;
+        }
+
+
+         .hidden {
+            display: none;
+        }
+
+        
+    </style>
+
+   
+
+</head>
+
+ 
+<body class="p-8 bg-gray-50">
+
+  <div class="max-w-5xl mx-auto">
+    <!-- Header -->
+    <h1 class="text-3xl font-bold mb-8">Job Application Tracker</h1>
+
+    <!-- Summary Cards -->
+    <div class="flex flex-wrap gap-6 mb-8">
+      <div class="flex-1 bg-white rounded-lg shadow p-6 text-center">
+        <p id="totalCount" class="text-3xl font-semibold">8</p>
+        <p class="text-gray-500 mt-1">Total Jobs</p>
+      </div>
+      <div class="flex-1 bg-white rounded-lg shadow p-6 text-center">
+        <p id="interviewCount" class="text-3xl font-semibold text-green-600">0</p>
+        <p class="text-gray-500 mt-1">Interview</p>
+      </div>
+      <div class="flex-1 bg-white rounded-lg shadow p-6 text-center">
+        <p id="rejectedCount" class="text-3xl font-semibold text-red-600">0</p>
+        <p class="text-gray-500 mt-1">Rejected</p>
+      </div>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-semibold">Available Jobs</h2>
+      <p id="jobsCount" class="text-gray-500">8 jobs</p>
+    </div>
+
+    <div class="flex space-x-3 mb-6">
+      <button id="filterAll" class="btn btn-sm btn-primary">All</button>
+      <button id="filterInterview" class="btn btn-sm btn-outline">Interview</button>
+      <button id="filterRejected" class="btn btn-sm btn-outline">Rejected</button>
+    </div>
+
+    <!-- Job Cards Container -->
+    <div id="jobCards" class="space-y-6">
+
+      <!-- Card Template -->
+      <div class="job-card bg-white rounded-lg shadow p-5 flex justify-between items-start" data-status="interview" id="job-1">
+        <div>
+          <h3 class="text-lg font-semibold">Mobile First Corp</h3>
+          <p class="text-gray-500 text-sm mb-1">React Native Developer</p>
+          <p class="text-gray-400 text-xs mb-2">Remote · Full-time · $120,000 - $170,000</p>
+          <p class="text-gray-700 text-sm mb-3">Build cross-platform mobile applications.</p>
+          <div class="flex space-x-2 mb-3">
+            <span class="badge badge-success">INTERVIEW</span>
+            <span class="badge badge-error">REJECTED</span>
+          </div>
+          <button class="btn btn-sm btn-error flex items-center space-x-2">
+            <i class="fas fa-trash"></i><span>Delete</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="job-card bg-white rounded-lg shadow p-5 flex justify-between items-start" data-status="rejected" id="job-2">
+        <div>
+          <h3 class="text-lg font-semibold">WebFlow Agency</h3>
+          <p class="text-gray-500 text-sm mb-1">Web Designer & Developer</p>
+          <p class="text-gray-400 text-xs mb-2">Los Angeles, CA · Full-time · $80,000 - $120,000</p>
+          <p class="text-gray-700 text-sm mb-3">Create stunning web experiences for clients.</p>
+          <div class="flex space-x-2 mb-3">
+            <span class="badge badge-success">INTERVIEW</span>
+            <span class="badge badge-error">REJECTED</span>
+          </div>
+          <button class="btn btn-sm btn-error flex items-center space-x-2">
+            <i class="fas fa-trash"></i><span>Delete</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="job-card bg-white rounded-lg shadow p-5 flex justify-between items-start" data-status="interview" id="job-3">
+        <div>
+          <h3 class="text-lg font-semibold">DataViz Solutions</h3>
+          <p class="text-gray-500 text-sm mb-1">Frontend Developer</p>
+          <p class="text-gray-400 text-xs mb-2">New York, NY · Full-time · $90,000 - $130,000</p>
+          <p class="text-gray-700 text-sm mb-3">Develop user-friendly interfaces.</p>
+          <div class="flex space-x-2 mb-3">
+            <span class="badge badge-success">INTERVIEW</span>
+            <span class="badge badge-error">REJECTED</span>
+          </div>
+          <button class="btn btn-sm btn-error flex items-center space-x-2">
+            <i class="fas fa-trash"></i><span>Delete</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="job-card bg-white rounded-lg shadow p-5 flex justify-between items-start" data-status="interview" id="job-4">
+        <div>
+          <h3 class="text-lg font-semibold">CloudWorks Inc</h3>
+          <p class="text-gray-500 text-sm mb-1">Backend Developer</p>
+          <p class="text-gray-400 text-xs mb-2">San Francisco, CA · Full-time · $100,000 - $150,000</p>
+          <p class="text-gray-700 text-sm mb-3">Maintain scalable APIs and databases.</p>
+          <div class="flex space-x-2 mb-3">
+            <span class="badge badge-success">INTERVIEW</span>
+            <span class="badge badge-error">REJECTED</span>
+          </div>
+          <button class="btn btn-sm btn-error flex items-center space-x-2">
+            <i class="fas fa-trash"></i><span>Delete</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="job-card bg-white rounded-lg shadow p-5 flex justify-between items-start" data-status="rejected" id="job-5">
+        <div>
+          <h3 class="text-lg font-semibold">Innovation Labs</h3>
+          <p class="text-gray-500 text-sm mb-1">UI/UX Designer</p>
+          <p class="text-gray-400 text-xs mb-2">Austin, TX · Full-time · $70,000 - $110,000</p>
+          <p class="text-gray-700 text-sm mb-3">Create user-centered designs for apps.</p>
+          <div class="flex space-x-2 mb-3">
+            <span class="badge badge-success">INTERVIEW</span>
+            <span class="badge badge-error">REJECTED</span>
+          </div>
+          <button class="btn btn-sm btn-error flex items-center space-x-2">
+            <i class="fas fa-trash"></i><span>Delete</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="job-card bg-white rounded-lg shadow p-5 flex justify-between items-start" data-status="interview" id="job-6">
+        <div>
+          <h3 class="text-lg font-semibold">MegaCorp Solutions</h3>
+          <p class="text-gray-500 text-sm mb-1">Full Stack Developer</p>
+          <p class="text-gray-400 text-xs mb-2">Boston, MA · Full-time · $95,000 - $140,000</p>
+          <p class="text-gray-700 text-sm mb-3">Build scalable solutions frontend & backend.</p>
+          <div class="flex space-x-2 mb-3">
+            <span class="badge badge-success">INTERVIEW</span>
+            <span class="badge badge-error">REJECTED</span>
+          </div>
+          <button class="btn btn-sm btn-error flex items-center space-x-2">
+            <i class="fas fa-trash"></i><span>Delete</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="job-card bg-white rounded-lg shadow p-5 flex justify-between items-start" data-status="interview" id="job-7">
+        <div>
+          <h3 class="text-lg font-semibold">Innovatech Labs</h3>
+          <p class="text-gray-500 text-sm mb-1">DevOps Engineer</p>
+          <p class="text-gray-400 text-xs mb-2">Seattle, WA · Full-time · $110,000 - $160,000</p>
+          <p class="text-gray-700 text-sm mb-3">Manage CI/CD pipelines and cloud infrastructure.</p>
+          <div class="flex space-x-2 mb-3">
+            <span class="badge badge-success">INTERVIEW</span>
+            <span class="badge badge-error">REJECTED</span>
+          </div>
+          <button class="btn btn-sm btn-error flex items-center space-x-2">
+            <i class="fas fa-trash"></i><span>Delete</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="job-card bg-white rounded-lg shadow p-5 flex justify-between items-start" data-status="rejected" id="job-8">
+        <div>
+          <h3 class="text-lg font-semibold">TechCorp Industries</h3>
+          <p class="text-gray-500 text-sm mb-1">Data Analyst</p>
+          <p class="text-gray-400 text-xs mb-2">Chicago, IL · Full-time · $75,000 - $115,000</p>
+          <p class="text-gray-700 text-sm mb-3">Analyze business data and create insights.</p>
+          <div class="flex space-x-2 mb-3">
+            <span class="badge badge-success">INTERVIEW</span>
+            <span class="badge badge-error">REJECTED</span>
+          </div>
+          <button class="btn btn-sm btn-error flex items-center space-x-2">
+            <i class="fas fa-trash"></i><span>Delete deleat</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+ 
+
+
+ <script src="script/app.js"></script>
+    
+</body>
+</html>

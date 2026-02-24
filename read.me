@@ -1,0 +1,83 @@
+##.getElementById() it Selects one element by its unique id.
+Example:
+<div id="box"></div>
+const box = document.getElementById("box");
+
+
+
+## getElementsByClassName() it selects all elements with a given class name.
+
+Example : <div class="item"></div>
+ 
+  document.getElementsByClassName("myClass");
+
+
+
+##  querySelector()
+
+Selects the first element that matches a CSS selector.
+Example;document.querySelector("#box"); 
+
+ ## querySelectorAll()
+ 
+Selects all elements matching a CSS selector. 
+Example:const items = document.querySelectorAll(".item");
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 2.<ul id="list"></ul>
+const li = document.createElement("li");
+li.textContent = "New Item";
+
+const list = document.getElementById("list");
+list.appendChild(li);
+
+
+
+
+
+
+
+
+
+3.  Event bubbling is a behavior in the DOM where an event starts at the target element and then “bubbles up” through its parent elements all the way to the root
+
+its work:When an event happens (like a click), it goes through three phases:
+
+Capturing phase (top → down)
+
+Target phase (actual element clicked)
+
+Bubbling phase (bottom → up)
+
+Most event listeners run during the bubbling phase by default.
+
+
+
+
+
+4. What Is Event Delegation?
+
+ans:
+
+Event Delegation is a technique in JavaScript where you attach a single event listener to a parent element to handle events for its child elements.
+
+It works because of event bubbling — when an event happens on a child, it bubbles up to the parent.
+
+
+
+
+5.preventDefault() → “Don’t do what the browser normally does.”
+
+stopPropagation() → “Don’t tell the parent about this.”
