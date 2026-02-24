@@ -70,9 +70,6 @@ function updateCounters() {
  
 updateCounters();
 
-updateCounters();
-updateCounters();
- 
  
  
  
