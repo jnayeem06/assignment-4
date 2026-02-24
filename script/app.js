@@ -74,6 +74,6 @@ updateCounters();
 updateCounters();
 updateCounters();
 updateCounters();
-updateCounters();
+ 
  
  
